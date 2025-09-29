@@ -20,9 +20,19 @@ public class FullNameApplication {
         System.out.print("Suffix: ");
         String suffix = sc.nextLine().toUpperCase().trim();
 
-        System.out.printf("Your full name is: %s %s %s %s%n",
-                firstName, middleName, lastName, suffix);
+        StringBuilder fullName = new StringBuilder(firstName);
 
+        if (!middleName.isEmpty()){
+            fullName.append(" ").append(middleName);
+        }
+        if (!lastName.isEmpty()){
+            fullName.append(" ").append(lastName);
+        }
+        if (!suffix.isEmpty()){
+            fullName.append(" ").append(suffix);
+        }
+
+        System.out.println("Full name: " + fullName.toString());
 
 
     }
