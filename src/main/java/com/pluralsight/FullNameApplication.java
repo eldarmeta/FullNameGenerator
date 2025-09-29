@@ -1,6 +1,8 @@
 package com.pluralsight;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class FullNameApplication {
     public static void main(String[] args) {
@@ -20,20 +22,16 @@ public class FullNameApplication {
         System.out.print("Suffix: ");
         String suffix = sc.nextLine().toUpperCase().trim();
 
-        StringBuilder fullName = new StringBuilder(firstName);
+        String[] basePart = { firstName, middleName, lastName };
 
-        if (!middleName.isEmpty()){
-            fullName.append(" ").append(middleName);
-        }
-        if (!lastName.isEmpty()){
-            fullName.append(" ").append(lastName);
-        }
-        if (!suffix.isEmpty()){
-            fullName.append(" ").append(suffix);
+        String fullName = Arrays.stream(basePart)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.joining(" "));
+
+        if (!suffix.isEmpty()) {
+            fullName += ", " + suffix;
         }
 
-        System.out.println("Full name: " + fullName.toString());
-
-
+        System.out.println("Full name: " + fullName);
     }
 }
